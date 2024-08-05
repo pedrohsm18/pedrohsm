@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+#imagem {
+    width: 300px;
+    height: auto;
+    margin-top: 20px;
+}
+
+body.morning {
+    background-color: #FFFAE3;
+}
+
+body.afternoon {
+    background-color: #FFDAB9;
+}
+
+body.evening {
+    background-color: #B0C4DE;
+}

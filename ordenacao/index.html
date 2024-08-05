@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteio e Ordenação</title>
+</head>
+<body>
+<h2>Números Aleatórios e Ordenação</h2>
+<button onclick="gerarNumeros()">Gerar Números Aleatórios</button>
+<button onclick="ordenarNumeros()">Ordenar Números</button>
+<p id="numerosGerados"></p>
+<script src="script.js"></script>
+</body>
+</html>
+
+<script>
+function gerarNumeros() {
+  var numeros = [];
+  for (var i = 0; i < 10; i++) {
+    numeros.push(Math.floor(Math.random() * 100)); // Gera números aleatórios de 0 a 99
+  }
+  document.getElementById("numerosGerados").innerText = "Números Gerados: " + numeros.join(", ");
+}
+
+function ordenarNumeros() {
+  var numeros = document.getElementById("numerosGerados").innerText.split(", ").map(function(num) {
+    return parseInt(num);
+  });
+  numeros.sort(function(a, b) {
+    return a - b;
+  });
+  document.getElementById("numerosGerados").innerText = "Números Ordenados: " + numeros.join(", ");
+}
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Idade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: gray;
+        }
+
+        #imagem {
+            width: 300px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Idade</h1>
+
+    <form id="formulario">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input type="date" id="dataNascimento" required><br><br>
+
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select><br><br>
+
+        <button type="button" onclick="calcularIdade()">Calcular</button>
+    </form>
+
+    <div id="resultado" class="hidden">
+        <h2 id="mensagem"></h2>
+        <p id="idade"></p>
+        <img id="imagem" alt="Imagem relacionada com a idade e sexo">
+    </div>
+
+    <script>
+        function calcularIdade() {
+            var dataNascimento = new Date(document.getElementById('dataNascimento').value);
+            var sexo = document.getElementById('sexo').value;
+            var hoje = new Date();
+            var idade = hoje.getFullYear() - dataNascimento.getFullYear();
+            var mes = hoje.getMonth() - dataNascimento.getMonth();
+
+            if (mes < 0 || (mes === 0 && hoje.getDate() < dataNascimento.getDate())) {
+                idade--;
+            }
+
+            var mensagem = "";
+            var imagemSrc = "";
+
+            if (idade < 13) {
+                mensagem = 'Criança';
+                imagemSrc = sexo === 'masculino' ? "img/crianca_masculino.jpg" : 'img/crianca_feminino.jpg';
+            } else if (idade < 20) {
+                mensagem = 'Adolescente';
+                imagemSrc = sexo === 'masculino' ? 'img/adolescente_masculino.jpg' : 'img/adolescente_feminino.jpg';
+            } else if (idade < 60) {
+                mensagem = 'Adulto';
+                imagemSrc = sexo === 'masculino' ? 'img/adulto_masculino.jpg' : 'img/adulto_feminino.jpg';
+            } else if (idade >= 100) {
+                mensagem = 'Morto';
+                imagemSrc = 'img/caixao.jpg';
+            } else {
+                mensagem = 'Idoso';
+                imagemSrc = sexo === 'masculino' ? 'img/idoso_masculino.jpg' : 'img/idoso_feminino.jpg';
+            }
+
+            document.getElementById('mensagem').textContent = mensagem;
+            document.getElementById('idade').textContent = 'Idade: ' + idade + ' anos';
+            document.getElementById('imagem').src = imagemSrc;
+            document.getElementById('resultado').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
